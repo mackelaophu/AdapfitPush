@@ -136,9 +136,19 @@ struct ContentView: View {
 
                     // ─── Data Payload ─────────────────────
                     GroupBox(label: Label("Data Payload", systemImage: "doc.text").font(.headline)) {
-                        LabeledField("force_update_min_version") {
-                            TextField("vd: 1.0.0", text: $vm.forceUpdateMinVersion)
-                                .textFieldStyle(.roundedBorder)
+                        VStack(alignment: .leading, spacing: 10) {
+                            LabeledField("force_update_min_version") {
+                                TextField("vd: 1.0.0", text: $vm.forceUpdateMinVersion)
+                                    .textFieldStyle(.roundedBorder)
+                            }
+                            LabeledField("optional_update_min_version") {
+                                TextField("vd: 1.1.0", text: $vm.optionalUpdateMinVersion)
+                                    .textFieldStyle(.roundedBorder)
+                            }
+                            LabeledField("screen_id") {
+                                TextField("vd: 1, 2", text: $vm.screenId)
+                                    .textFieldStyle(.roundedBorder)
+                            }
                         }
                         .padding(8)
                     }

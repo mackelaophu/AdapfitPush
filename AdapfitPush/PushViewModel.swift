@@ -18,6 +18,8 @@ class PushViewModel: ObservableObject {
 
     // Data payload
     @Published var forceUpdateMinVersion: String = "1.0.0"
+    @Published var optionalUpdateMinVersion: String = ""
+    @Published var screenId: String = ""
 
     // APNS
     @Published var apnsPushType: String = "alert"
@@ -70,6 +72,8 @@ class PushViewModel: ObservableObject {
             topic: useTopicMode ? topic : "",
             deviceToken: useTopicMode ? "" : deviceToken,
             forceUpdateMinVersion: forceUpdateMinVersion,
+            optionalUpdateMinVersion: optionalUpdateMinVersion,
+            screenId: screenId,
             apnsPushType: apnsPushType,
             apnsPriority: apnsPriority,
             sound: sound,

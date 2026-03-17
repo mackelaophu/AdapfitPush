@@ -8,6 +8,8 @@ struct FCMService {
         var topic: String
         var deviceToken: String
         var forceUpdateMinVersion: String
+        var optionalUpdateMinVersion: String
+        var screenId: String
         var apnsPushType: String
         var apnsPriority: String
         var sound: String
@@ -32,14 +34,26 @@ struct FCMService {
             target = ["token": config.deviceToken.trimmingCharacters(in: .whitespaces)]
         }
 
+        var dataPayload: [String: String] = [
+            "force_update_min_version": config.forceUpdateMinVersion.trimmingCharacters(in: .whitespaces)
+        ]
+
+        let optionalVersion = config.optionalUpdateMinVersion.trimmingCharacters(in: .whitespaces)
+        if !optionalVersion.isEmpty {
+            dataPayload["optional_update_min_version"] = optionalVersion
+        }
+
+        let screenId = config.screenId.trimmingCharacters(in: .whitespaces)
+        if !screenId.isEmpty {
+            dataPayload["screen_id"] = screenId
+        }
+
         var payload: [String: Any] = [
             "notification": [
                 "title": config.title,
                 "body":  config.body
             ],
-            "data": [
-                "force_update_min_version": config.forceUpdateMinVersion
-            ],
+            "data": dataPayload,
             "apns": [
                 "headers": [
                     "apns-push-type": config.apnsPushType,
